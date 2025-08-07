@@ -17,20 +17,17 @@ func GetDataSourceURL() string {
 func GetApplicationPort() int {
 	portStr := getEnvironmentValue("APPLICATION_PORT")
 	port, err := strconv.Atoi(portStr)
+
 	if err != nil {
-		log.Fatalf("invalid port: %s", portStr)
+		log.Fatalf("port: %s is invalid", portStr)
 	}
+
 	return port
 }
-
 func getEnvironmentValue(key string) string {
-	value := os.Getenv(key)
-	if value == "" {
-		log.Fatalf("%s environment variable is missing", key)
+	if os.Getenv(key) == "" {
+		log.Fatalf("%s environment variable is missing.", key)
 	}
-	return value
-}
 
-func GetPaymentServiceUrl() string {
-	return getEnvironmentValue("PAYMENT_SERVICE_URL")
+	return os.Getenv(key)
 }
