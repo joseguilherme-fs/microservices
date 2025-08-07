@@ -3,12 +3,12 @@ package grpc
 import (
 	"context"
 	"fmt"
-  "net"
+	"net"
 
 	"log"
-	
+
+	"github.com/joseguilherme-fs/microservices-proto/golang/order"
 	"github.com/joseguilherme-fs/microservices/order/config"
-  "github.com/joseguilherme-fs/microservices-proto/golang/order"
 	"github.com/joseguilherme-fs/microservices/order/internal/application/core/domain"
 	"github.com/joseguilherme-fs/microservices/order/internal/ports"
 	"google.golang.org/grpc"
