@@ -5,8 +5,8 @@ import (
 
 	"github.com/joseguilherme-fs/microservices/order/config"
 	"github.com/joseguilherme-fs/microservices/order/internal/adapters/db"
+	// "github.com/joseguilherme-fs/microservices/order/internal/adapters/rest"
 	"github.com/joseguilherme-fs/microservices/order/internal/adapters/grpc"
-	"github.com/joseguilherme-fs/microservices/order/internal/adapters/payment"
 	"github.com/joseguilherme-fs/microservices/order/internal/application/core/api"
 )
 
@@ -15,11 +15,8 @@ func main() {
 	if err != nil {
 		log.Fatalf("failed to connect to database: %v", err)
 	}
-	paymentAdapter, err := payment_adapter.NewAdapter(config.GetPaymentServiceUrl())
-	if err != nil {
-		log.Fatalf("Failed to initialize payment stub. Error: %v", err)
-	}
-	application := api.NewApplication(dbAdapter, paymentAdapter)
+
+	application := api.NewApplication(dbAdapter)
 	grpcAdapter := grpc.NewAdapter(application, config.GetApplicationPort())
 	grpcAdapter.Run()
 }
